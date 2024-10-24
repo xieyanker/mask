@@ -24,11 +24,8 @@ func main() {
 		os.Exit(1)
 	}
 
-	maskMap := make(map[string]string)
 	var maskIds string
-	//fmt.Printf("%+v\n", mask)
 	for _, one := range mask.List {
-		maskMap[one.Id] = one.Name
 		maskIds = maskIds + one.Id + ","
 	}
 	maskIds = strings.TrimSuffix(maskIds, ",")
@@ -59,7 +56,14 @@ func main() {
 	}
 
 	fmt.Printf("Nam\tCur\tChg\tPer\tLow\tHig\tOpe\n")
-	for _, data := range originData.Data {
-		fmt.Printf("%v\t%v\t%v\t%v\t%v\t%v\t%v\n", maskMap[data.Symbol], data.Current, data.Chg, data.Percent, data.Low, data.High, data.Open)
+	for index, _ := range mask.List {
+		// Sort by profile order.
+		for _, data := range originData.Data {
+			if mask.List[index].Id == data.Symbol {
+				fmt.Printf("%v\t%v\t%v\t%v\t%v\t%v\t%v\n", mask.List[index].Name, data.Current, data.Chg, data.Percent, data.Low, data.High, data.Open)
+				break
+			}
+		}
 	}
 }
+
