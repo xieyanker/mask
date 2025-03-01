@@ -8,9 +8,42 @@ import (
 	"net/http"
 	"io"
 	"strings"
+	"time"
 )
 
+const (
+	refreshInterval = 2 * time.Second // 刷新间隔
+	outputLine      = 3               // 输出显示行号
+)
+
+// 初始化屏幕布局
+func initScreen() {
+	fmt.Print("\033[H\033[2J") // 清屏
+	fmt.Println("=== MASK ===")
+	fmt.Println("---------------------------------")
+	fmt.Printf("\033[%d;0H", outputLine) // 定位到输出行
+}
+
 func main() {
+	initScreen()
+	ticker := time.NewTicker(refreshInterval)
+	defer ticker.Stop()
+
+	for {
+		select {
+		case <-ticker.C:
+			updateDisplay(showDisplay())
+		}
+	}
+}
+
+// 更新显示内容
+func updateDisplay(content string) {
+	// 定位到指定行并清除行内容
+	fmt.Printf("\033[%d;0H\033[K%s", outputLine, content)
+}
+
+func showDisplay() string {
 	jsonStr, err := os.ReadFile("conf/mask.json")
 	if err != nil {
 		fmt.Println(err)
@@ -55,15 +88,17 @@ func main() {
 		os.Exit(1)
 	}
 
-	fmt.Printf("Nam\tCur\tChg\tPer\tLow\tHig\tOpe\n")
+	echo := fmt.Sprintf("Nam\tCur\tChg\tPer\tLow\tHig\tOpe\n")
 	for index, _ := range mask.List {
 		// Sort by profile order.
 		for _, data := range originData.Data {
 			if mask.List[index].Id == data.Symbol {
-				fmt.Printf("%v\t%v\t%v\t%v\t%v\t%v\t%v\n", mask.List[index].Name, data.Current, data.Chg, data.Percent, data.Low, data.High, data.Open)
+				echo += fmt.Sprintf("%v\t%v\t%v\t%v\t%v\t%v\t%v\n", mask.List[index].Name, data.Current, data.Chg, data.Percent, data.Low, data.High, data.Open)
 				break
 			}
 		}
 	}
+
+	return echo
 }
 

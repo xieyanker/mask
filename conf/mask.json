@@ -2,35 +2,15 @@
   "list": [
     {
       "id": "SH000001",
-      "name": "SHDP"
-    },
-    {
-      "id": "SH600795",
-      "name": "GDDL"
-    },
-    {
-      "id": "SH516290",
-      "name": "GFLT"
+      "name": "SZZS"
     },
     {
       "id": "SH600036",
       "name": "ZSYH"
     },
     {
-      "id": "SH601919",
-      "name": "ZYHK"
-    },
-    {
-      "id": "SH603993",
-      "name": "LYMY"
-    },
-    {
-      "id": "SZ159509",
-      "name": "NZKJ"
-    },
-    {
-      "id": "SZ002583",
-      "name": "HND!"
+      "id": "SH600519",
+      "name": "GZMT"
     }
   ]
 }
