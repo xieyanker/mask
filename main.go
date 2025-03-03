@@ -85,7 +85,7 @@ func showDisplay() {
 		// Sort by profile order.
 		for _, data := range originData.Data {
 			if mask.List[index].Id == data.Symbol {
-				echo += fmt.Sprintf("%v\t%v\t%v\t%v\t%v\t%v\t%v\n", mask.List[index].Name, data.Current, data.Chg, data.Percent, data.Low, data.High, data.Open)
+				echo += fmt.Sprintf("%v\t%.2f\t%.2f\t%.2f\t%.2f\t%.2f\t%.2f\n", mask.List[index].Name, data.Current, data.Chg, data.Percent, data.Low, data.High, data.Open)
 				break
 			}
 		}
@@ -99,4 +99,3 @@ func showDisplay() {
 	}
 	fmt.Print(sb.String())
 }
-
