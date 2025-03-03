@@ -2,6 +2,10 @@
 
 一个伪装的查看股票实时行情的`Linux`程序，类似`top`命令在服务器上运行，实时抓取[雪球网站](https://xueqiu.com)的数据。
 
+[amd64程序下载](https://github.com/xieyanker/mask/releases/download/v1.0.0/mask-amd64.tar.gz)
+
+[arm64程序下载](https://github.com/xieyanker/mask/releases/download/v1.0.0/mask-arm64.tar.gz)
+
 ### 一、 How to build?
 
 ```shell
