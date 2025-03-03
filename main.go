@@ -13,15 +13,12 @@ import (
 
 const (
 	refreshInterval = 2 * time.Second // 刷新间隔
-	outputLine      = 3               // 输出显示行号
 )
 
 // 初始化屏幕布局
 func initScreen() {
 	fmt.Print("\033[H\033[2J") // 清屏
-	fmt.Println("=== MASK ===")
-	fmt.Println("---------------------------------")
-	fmt.Printf("\033[%d;0H", outputLine) // 定位到输出行
+	fmt.Printf("\033[%d;0H", 1) // 定位到输出行
 }
 
 func main() {
@@ -32,18 +29,13 @@ func main() {
 	for {
 		select {
 		case <-ticker.C:
-			updateDisplay(showDisplay())
+			showDisplay()
 		}
 	}
 }
 
-// 更新显示内容
-func updateDisplay(content string) {
-	// 定位到指定行并清除行内容
-	fmt.Printf("\033[%d;0H\033[K%s", outputLine, content)
-}
 
-func showDisplay() string {
+func showDisplay() {
 	jsonStr, err := os.ReadFile("conf/mask.json")
 	if err != nil {
 		fmt.Println(err)
@@ -99,6 +91,12 @@ func showDisplay() string {
 		}
 	}
 
-	return echo
+	var sb strings.Builder
+	lines := strings.Split(echo, "\n")
+	for index, line := range lines {
+		sb.WriteString(fmt.Sprintf("\033[%d;0H\033[K", index + 1))
+		sb.WriteString(line)
+	}
+	fmt.Print(sb.String())
 }
 
