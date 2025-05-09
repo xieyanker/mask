@@ -80,12 +80,13 @@ func showDisplay() {
 		os.Exit(1)
 	}
 
-	echo := fmt.Sprintf("Nam\tCur\tChg\tPer\tLow\tHig\tOpe\n")
+	echo := fmt.Sprintf("%-4s %8s %8s %8s %8s %8s %8s\n", "Nam", "Cur", "Chg", "Per", "Low", "Hig", "Ope")
+//	echo := fmt.Sprintf("Nam\tCur\tChg\tPer\tLow\tHig\tOpe\n")
 	for index, _ := range mask.List {
 		// Sort by profile order.
 		for _, data := range originData.Data {
 			if mask.List[index].Id == data.Symbol {
-				echo += fmt.Sprintf("%v\t%.2f\t%.2f\t%.2f\t%.2f\t%.2f\t%.2f\n", mask.List[index].Name, data.Current, data.Chg, data.Percent, data.Low, data.High, data.Open)
+				echo += fmt.Sprintf("%-4s %8.3f %8.3f %8.3f %8.3f %8.3f %8.3f\n", mask.List[index].Name, data.Current, data.Chg, data.Percent, data.Low, data.High, data.Open)
 				break
 			}
 		}
