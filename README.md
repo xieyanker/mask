@@ -2,9 +2,9 @@
 
 一个伪装的查看股票实时行情的`Linux`程序，类似`top`命令在服务器上运行，实时抓取[雪球网站](https://xueqiu.com)的数据。
 
-[amd64程序下载](https://github.com/xieyanker/mask/releases/download/v1.0.0/mask-amd64.tar.gz)
+[amd64程序下载](https://github.com/xieyanker/mask/releases/download/v1.0.1/mask-amd64.tar.gz)
 
-[arm64程序下载](https://github.com/xieyanker/mask/releases/download/v1.0.0/mask-arm64.tar.gz)
+[arm64程序下载](https://github.com/xieyanker/mask/releases/download/v1.0.1/mask-arm64.tar.gz)
 
 ### 一、 How to build?
 
@@ -83,7 +83,7 @@ vim conf/mask.json
 
 2. 输出列表是按照`json`文件中的配置顺序进行自动排序
 
-3. 为了美观，小数点均保留2位数(待优化，个别股票/etf需要追踪到第三位)
+3. 为了美观，小数点均保留3位数
 
 4. 每一列的含义：
 
